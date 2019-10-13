@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">New product</h2>
+                    <form action="/api/admin/add" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" required name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <textarea name="description" id="description" class="form-control" required rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price:</label>
+                            <input type="number" id="price" step="1" min="0" name="price" required class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="sizes">Sizes:</label>
+                                    <input type="text" id="sizes" name="sizes" required pattern="^\w+(;\w+)*$" class="form-control">
+                                    <small class="form-text text-muted">Use semicolom ( ; ) to separate each one</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="colors">Colors:</label>
+                                    <input type="text" id="colors" name="colors" required pattern="^\w+(;\w+)*$" class="form-control">
+                                    <small class="form-text text-muted">Use semicolom ( ; ) to separate each one</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="sex">Sex:</label>
+                                    <select class="form-control" id="sex" name="sex">
+                                        <option value='both'>Both</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="category">Category:</label>
+                                    <select class="form-control" id="category" name="category">
+                                        {{#each categories}}
+                                            <option value={{{id}}}>{{{category}}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Image:</label>
+                            <input type="file" required name="image" accept="image/*" required class="form-control-file">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block">Add Product</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

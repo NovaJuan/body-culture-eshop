@@ -1,0 +1,111 @@
+<div class="container mb-4">
+    <div class="card" style="border: none; overflow:hidden;">
+        <div class="row no-gutters">
+            <div class="col-lg-6" style="overflow: hidden;background: #555555; display: flex;align-items: center;justify-content: center;">
+                <img src="{{ product.main_image_url }}" style="width:100%;" alt="{{ product.name }}" class="">
+            </div>
+            <div class="col-lg-6">
+                <div class="card-body">
+                    <h2><b>UPDATE: </b>{{{product.name}}}</h2>
+                    <small class="form-text text-danger"><b>If don't want to update a field then keep it empty!</b></small>
+                    
+                    <hr>
+                    <form action="/api/admin/update/{{product.id}}" method="POST" class="mt-3" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="">New name:</label>
+                            <input type="text" name='name' class="form-control" placeholder="Old: {{product.name}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="">New description:</label>
+                            <textarea name='description' class="form-control" placeholder="Old: {{product.description}}"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="">New price:</label> 
+                                    <input type="number" id="price" name="price" min='0' data-old='{{product.price}}' class="form-control" placeholder="Old: {{product.price}}$">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="">Set discount by price or percent:</label>
+                                    <div class="row double-input">
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <input type="number" id="discount-price" min='0' name="discount_price" class="form-control" placeholder="Old: {{product.discount_price}}">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">$</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <input type="number" id="discount-percent" min='0' data-old='{{product.discount_percent}}' name="discount_percent" class="form-control" placeholder="Old: {{product.discount_percent}}">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6" >
+                                    <label for="sizes">Sizes: (Old: {{{product.sizes}}})</label>
+                                    <input type="text" id="sizes" name="sizes" pattern="^\w+(;\w+)*$" placeholder="Old: {{product.sizes}}" class="form-control">
+                                    <small class="form-text text-muted">Use semicolom ( ; ) to separate each one</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="colors">Colors: (Old: {{{product.colors}}})</label>
+                                    <input type="text" id="colors" name="colors" placeholder="Old: {{product.colors}}" pattern="^\w+(;\w+)*$" class="form-control">
+                                    <small class="form-text text-muted">Use semicolom ( ; ) to separate each one</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="sex">Sex: (Old: {{{product.sex}}})</label>
+                                    <select class="form-control" id="sex" name="sex">
+                                        <option value="">Select</option>
+                                        <option value='both'>Both</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="category">Category: (Old: {{{product.category_name}}})</label>
+                                    <select class="form-control" id="category" name="category">
+                                            <option value="">Select</option>
+                                        {{#each categories}}
+                                            <option value={{{id}}}>{{{category}}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">New image:</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="image" accept="image/jpeg,image/png">
+                                    <label class="custom-file-label" for="inputGroupFile01">Click to choose image</label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name='_csrf' value='{{csrfToken}}'>
+                        <input type="hidden" name="old_main_url" value="{{ product.main_image_url }}">
+                        <input type="hidden" name="old_card_url" value="{{ product.card_image_url }}">
+                        <input type="hidden" name="old_thumbnail_url" value="{{ product.thumbnail_url }}">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block">Save product</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src='/public/js/update.js'></script>

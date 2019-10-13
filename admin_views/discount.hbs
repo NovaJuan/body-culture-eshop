@@ -1,0 +1,45 @@
+<meta name="csrf-token" content="{{csrfToken}}">
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="search-form mb-4 rounded">
+                        <div class="products shadow p-2 rounded">
+                            <input type="text" id='input-search' placeholder="Search products" class="form-control mb-1">
+                            <input type="number" step="1" id='input-byId' placeholder="Search by ID" class="form-control mb-1">
+                            <input type="number" id="input-byPrice" placeholder="Search by price starting from this" step="0.01" class="form-control mb-1">
+                            <div class="list-wrapper" id="list-wrapper">
+                                <ul class="list-group product-list" id="products-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="added-list">
+                        <h2 class="text-center">To Discount</h2>
+                        <p class="text-center">Set the discount percent for this products or click over to delete from the list.</p>
+                        <div class="on-discount-list">
+                            <ul class="list-group product-list" id="discount-list"></ul>
+                            <input type="number" step="1" min="0" max="100" placeholder="Set discount percent number (i.e. '25')" class="form-control mt-1" id="discount-percent">
+                            <div class="buttons text-center mt-1">
+                                <button class="btn btn-success btn-sm" id="upload-discount">Apply discount</button>
+                                <button class="btn btn-danger btn-sm" id="clear-list">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h2 class="text-center">Erase discounts</h2>
+            <a href="/api/admin/discount/erase/all" class="btn btn-danger btn-block">Erase all discounts</a>
+            <p class="text-center mt-3 mb-0">Click on a product to delete its discount</p>
+            <ul class="list-group mt-3 product-list">
+                {{#each productsOnDiscount}}
+                    <li class="list-group-item onDiscount text-center"><a href="/api/admin/discount/erase/{{{id}}}" class="to-dicount-link">ID: {{{id}}} | {{{name}}} | {{{price}}}$ to {{{discount_price}}}$ ({{{discount_percent}}}% OFF)</a></li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="/public/js/discount-page.js"></script>

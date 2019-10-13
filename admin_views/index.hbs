@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="text-center">All Products</h2>
+            <div class="text-center mb-2">
+                <a href="/api/admin?sex=all" class="btn btn-primary btn-sm">All</a>
+                <a href="/api/admin?sex=female" class="btn btn-primary btn-sm">Female</a>
+                <a href="/api/admin?sex=male" class="btn btn-primary btn-sm">Male</a>
+                <a href="/api/admin?sex=both" class="btn btn-primary btn-sm">Both</a>
+            </div>
+            <table class="table table-striped table-bordered table-hover text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Discount Price</th>
+                        <th scope="col">Discount Percent</th>
+                        <th scope="col">Sex</th>
+                        <th scope="col">Operations</th>
+                    </tr>
+                </thead>
+                <tbody class="">    
+                    {{#each products}}
+                    <tr>
+                        <th scope="row">{{{id}}}</th>
+                        <td><img src="{{thumbnail_url}}" style="width:80px" alt=""></td>
+                        <td>{{{name}}}</td>
+                        <td>{{{price}}}$</td>
+                        <td>{{{discount_price}}}$</td>
+                        <td>{{{discount_percent}}}%</td>
+                        <td>{{{sex}}}</td>
+                        <td>
+                            <div class="buttons">
+                                <a href="/api/admin/delete/{{{id}}}" class="btn btn-outline-danger btn-sm mr-2">Delete</a>
+                                <a href="/api/admin/update/{{{id}}}" class="btn btn-outline-primary btn-sm">Update</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
